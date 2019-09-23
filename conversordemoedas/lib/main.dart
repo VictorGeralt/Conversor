@@ -72,7 +72,7 @@ class _HomeState extends State<Home> {
   
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black12,
+      backgroundColor: Colors.white,
       appBar: AppBar(title: Text('Conversor de Moeda\$'),
       backgroundColor: Colors.red,
       centerTitle: true,
@@ -84,32 +84,33 @@ class _HomeState extends State<Home> {
             case ConnectionState.none:
             case ConnectionState.waiting:
               return Text('Carregando...',
-              style: TextStyle(color: Colors.red, fontSize: 25),
+              style: TextStyle(color: Colors.black, fontSize: 25),
               textAlign: TextAlign.center,
               );
+              break;
               default:
               if (snapshot.hasError) {
               return Text('Erro ao carregar dados',
-              style: TextStyle(color: Colors.red, fontSize: 25),
+              style: TextStyle(color: Colors.black, fontSize: 25),
               textAlign: TextAlign.center,);
               } else {
                 dolar = snapshot.data["results"]["currencies"]["USD"]["buy"];
-                euro = snapshot.data["results"]["currencies"]["UER"]["buy"];
+                euro = snapshot.data["results"]["currencies"]["EUR"]["buy"];
               return SingleChildScrollView(
                 padding: EdgeInsets.all(10),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     Icon(
                       Icons.monetization_on,
                       size: 150,
                       color: Colors.red,
                     ),
-                    buildTextField('Reais','R\$',realController,_digitouReal),
+                    buildTextField('Reais',"R\$",realController,_digitouReal),
                     Divider(),
-                    buildTextField('Dólar','US\$',dolarController,_digitouDolar),
+                    buildTextField('Dólar',"US\$",dolarController,_digitouDolar),
                     Divider(),
-                    buildTextField('Euro','€',realController,_digitouEuro)
+                    buildTextField('Euro',"€",euroController,_digitouEuro)
                     
                   ],
                 ),
@@ -126,10 +127,10 @@ Widget buildTextField(String label,String prefixo, TextEditingController control
   return TextField(
     decoration: InputDecoration(
       labelText: label,
-      labelStyle: TextStyle(color: Colors.red),
+      labelStyle: TextStyle(color: Colors.black),
       border: OutlineInputBorder(),
       prefixText: prefixo),
-    style: TextStyle(color: Colors.red, fontSize: 25),
+    style: TextStyle(color: Colors.black, fontSize: 25),
     controller: controlador,
     onChanged: funcao,
     keyboardType: TextInputType.numberWithOptions(decimal: true),
